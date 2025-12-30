@@ -3,7 +3,7 @@ Developed for DigSilent PowerFactory 15.1 .
 
 This program runs multiple loadflows by varying the active power setting of the selected generators and calculates the resulting active and reactive power flow on the Point of Common Coupling (PCC).
 
-These values of P,Q are plotted in a graph along with the required boundary as depicted in the RfG 'IPTO Regulation (EU) 631/2016'.
+These values of P,Q are plotted in a graph along with the required boundary as stated in the RfG 'IPTO Regulation (EU) 631/2016'.
 
 <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/40bbc9e5-20af-41b1-a3c3-d5b551704f2a" />
 
@@ -16,6 +16,8 @@ Open Data Manager
 - Create a new Study Case
 - Create a DPL Command (ComDPL) in that Study Case
 - **Select the Generators involved in the RfG Study, define a DPL Commands Set and rename it as 'GENERATORS'**
+
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/855377f7-871a-48db-99f8-e59b8b5201b7" />
 
 Select DPL Script
 - Create a Loadflow Calculation (ComLdf) with the parameter 'Consider Reactive Power Limits' enabled and rename it as 'LOADFLOW'
