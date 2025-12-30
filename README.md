@@ -1,41 +1,47 @@
-# PQ Curve
+# PQ/VQ Curves
 Developed for DigSilent PowerFactory 15.1 .
 
-This program runs multiple loadflows by varying the active power setting of the selected generators and calculates the resulting active and reactive power flow on the Point of Common Coupling (PCC).
+This program runs multiple loadflows in order to plot the two graphs required by the RfG, PQ (P<=Pmax) and VQ (P=Pmax).
 
-These values of P,Q are plotted in a graph along with the required boundary as stated in the RfG 'IPTO Regulation (EU) 631/2016'.
+By varying the active power setting of the selected generators, it calculates the resulting active and reactive power flow on the Point of Common Coupling (PCC).
+
+By varying the voltage setting of the grid, it calculates the resulting reactive power flow on the Point of Common Coupling (PCC) when the generators operate Pmax.
+
+The resulting values are plotted in a graph along with the required boundary as stated in the RfG 'IPTO Regulation (EU) 631/2016'.
 
 <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/40bbc9e5-20af-41b1-a3c3-d5b551704f2a" />
 
 ## Instructions
-*The following instructions are only required if the import of the pfd file is not possible, otherwise follow only the instructions with **bold***
+*The following instructions are only required if the import of the pfd file is not possible, otherwise follow only the instructions with **bold**.*
+
+*These steps refer to the "pq" script of the repository, but one can follow the same procedure for the "vq" script.*
 
 <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/8ab11774-0347-48bc-856e-c5076567e50f" />
 
-Open Data Manager
+### Open Data Manager
 - Create a new Study Case
 - Create a DPL Command (ComDPL) in that Study Case
-- **Select the Generators involved in the RfG Study, define a DPL Commands Set and rename it as 'GENERATORS'**
+- **Select the Generators involved in the RfG Study, define a DPL Commands Set and rename it as 'GENERATORS'** (optionally move the Commands Set inside the DPL Command's folder)
 
 <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/855377f7-871a-48db-99f8-e59b8b5201b7" />
 
-Select DPL Script
+### Select DPL Script
 - Create a Loadflow Calculation (ComLdf) with the parameter 'Consider Reactive Power Limits' enabled and rename it as 'LOADFLOW'
 - Create a Results file (ElmRes) and rename it as 'RESULTS'
 - Create two vectors, rename them as 'RFG_P_VECTOR' and 'RFG_Q_VECTOR' and insert the values for the nominal boundary as described in the RfG Regulation
 
 <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/f192020e-737a-46a5-a34c-3bbd413f98ae" />
 
-Edit DPL Script
+### Edit DPL Script
 - **Edit the script and select the DPL Commands Set in the 'General Selection' field**
 - In the input parameters field, create two variables of type int named N_GEN and IS_PV. **The value of N_GEN should equal the number of generators selected and IS_PV should equal to '1' if the generators are PV**
-- **In the external objects field, select the busbar which is considered the PCC and name it 'PCC'**
+- **In the external objects field, select the busbar which is considered the PCC and name it 'PCC' (for the VQ script you must also select the external slack grid which defines the voltage setpoint, in the GRID variable)**
 - In the Advanced Options tab, create four variables of type double and rename them as 'RFG_P', 'RFG_Q', 'PCC_P', 'PCC_Q' and of unit 'p.u.'
 - In the Script tab, paste the script
 
 <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/e9cbd6ad-b862-4870-a0ea-a6b882286816" />
 
-New Graph
+### New Graph
 - Create a new XY graph and select for the first curve 'RFG_P' and 'RFG_Q' variables for the Y,X values
 - Create a new XY graph and select for the first curve 'PCC_P' and 'PCC_Q' variables for the Y,X values
 
